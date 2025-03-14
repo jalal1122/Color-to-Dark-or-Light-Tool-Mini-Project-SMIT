@@ -22,10 +22,6 @@ function fromHextoRGB(hex) {
   return arr;
 }
 
-inputColor.value = "345678";
-
-console.log(fromHextoRGB(inputColor.value));
-
 function changeColor(arr) {
   if (arr[0] < 20) {
     arr[0] = 20;
