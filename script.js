@@ -9,10 +9,11 @@ let alteredColor = document.querySelector(".showOutputColor");
 let toogleBtn = document.querySelector(".toggle");
 
 function fromHextoRGB(hex) {
-  if (hex.length === 3) {
-    hex = hex.split("").map(function (el) {
-      return el + el;
-    });
+  if(hex === "") {
+    return [255, 255, 255];
+  }
+  if (hex.length === 4) {
+    hex = "#" + hex[1] + hex[1] + hex[2] + hex[2] + hex[3] + hex[3];
   }
 
   let r = parseInt(hex.substring(1, 3), 16);
@@ -23,18 +24,16 @@ function fromHextoRGB(hex) {
 }
 
 function changeColor(arr) {
-  if (arr[0] < 20) {
-    arr[0] = 20;
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i] > 0 && arr[i] < 128) {
+      arr[i] += 30;
+    } else if (arr[i] < 255 && arr[i] > 128) {
+      arr[i] -= 30;
+    }
   }
-  if (arr[1] < 20) {
-    arr[1] = 20;
-  }
-  if (arr[2] < 20) {
-    arr[2] = 20;
-  }
-  r = arr[0] - 20;
-  g = arr[1] - 20;
-  b = arr[2] - 20;
+  r = arr[0];
+  g = arr[1];
+  b = arr[2];
   let color = `rgb(${r},${g},${b})`;
   alteredColor.style.backgroundColor = color;
   document.getElementById("colorOutput").value = fromRgbtoHex([r, g, b]);
